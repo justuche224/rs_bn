@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1744063372716,
+      "tag": "0000_red_wasp",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1744065972457,
+      "tag": "0001_pretty_fenris",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1744093133861,
+      "tag": "0002_happy_paladin",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1744093262524,
+      "tag": "0003_sharp_salo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1744093366727,
+      "tag": "0004_peaceful_shooting_star",
+      "breakpoints": true
+    }
+  ]
+}
