@@ -163,7 +163,7 @@ export class DepositService {
         const result = await db
             .select({
             currency: deposit.currency,
-            totalAmount: sql `SUM(${deposit.amount})`,
+            totalAmount: sql `SUM(${deposit.amount}::NUMERIC)`,
         })
             .from(deposit)
             .where(eq(deposit.status, "APPROVED"))

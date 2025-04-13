@@ -132,7 +132,7 @@ export class UserService {
         return await readFile(filepath);
     }
     async getUserStats() {
-        const [totalUsers, kycVerifiedUsers, twoFactorEnabledUsers, emailVerifiedUsers, usersByCountry] = await Promise.all([
+        const [totalUsers, kycVerifiedUsers, emailVerifiedUsers, usersByCountry] = await Promise.all([
             // Total users (excluding admins)
             db
                 .select({ count: sql `count(*)` })
@@ -143,13 +143,7 @@ export class UserService {
             db
                 .select({ count: sql `count(*)` })
                 .from(user)
-                .where(and(eq(user.kycVerified, true), ne(user.role, "ADMIN")))
-                .then(result => result[0].count),
-            // 2FA enabled users
-            db
-                .select({ count: sql `count(*)` })
-                .from(user)
-                .where(and(eq(user.twoFactorEnabled, true), ne(user.role, "ADMIN")))
+                .where(and(eq(user.kyc_verified, true), ne(user.role, "ADMIN")))
                 .then(result => result[0].count),
             // Email verified users
             db
@@ -170,7 +164,6 @@ export class UserService {
         return {
             totalUsers,
             kycVerified: kycVerifiedUsers,
-            twoFactorEnabled: twoFactorEnabledUsers,
             emailVerified: emailVerifiedUsers,
             byCountry: usersByCountry
         };

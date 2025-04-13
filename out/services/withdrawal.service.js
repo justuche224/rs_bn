@@ -147,7 +147,7 @@ export class WithdrawalService {
         const result = await db
             .select({
             currency: withdrawal.currency,
-            totalAmount: sql `SUM(${withdrawal.amount})`,
+            totalAmount: sql `SUM(${withdrawal.amount}::NUMERIC)`,
         })
             .from(withdrawal)
             .where(eq(withdrawal.status, "APPROVED"))
@@ -179,7 +179,7 @@ export class WithdrawalService {
         const result = await db
             .select({
             currency: withdrawal.currency,
-            totalAmount: sql `SUM(${withdrawal.amount})`,
+            totalAmount: sql `SUM(${withdrawal.amount}::NUMERIC)`,
         })
             .from(withdrawal)
             .where(and(eq(withdrawal.userId, userId), eq(withdrawal.status, "APPROVED")))

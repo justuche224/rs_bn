@@ -1,7 +1,6 @@
 import db from "../db/index.js";
 import { plans } from "../db/schema.js";
 import { eq, inArray } from "drizzle-orm";
-import { v4 as uuidv4 } from "uuid";
 export class PlansService {
     constructor() { }
     static getInstance() {
@@ -11,8 +10,8 @@ export class PlansService {
         return PlansService.instance;
     }
     async createPlan(data) {
-        const newPlan = await db.insert(plans).values(Object.assign(Object.assign({ id: uuidv4() }, data), { createdAt: new Date(), updatedAt: new Date() }));
-        return { success: true, planId: newPlan[0].insertId };
+        const newPlan = await db.insert(plans).values(Object.assign(Object.assign({}, data), { createdAt: new Date(), updatedAt: new Date() })).returning();
+        return { success: true, planId: newPlan[0].id };
     }
     async updatePlan(planId, data) {
         const plan = await db

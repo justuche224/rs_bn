@@ -2,7 +2,7 @@ import { join } from "path";
 export const productionConfig = {
     port: process.env.PORT || 5000,
     cors: {
-        origin: [process.env.FRONTEND_URL || "https://ecohavest.org"],
+        origin: [process.env.FRONTEND_URL || "https://resonantfinance.org"],
         allowHeaders: ["Content-Type", "Authorization"],
         allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
         exposeHeaders: ["Content-Length"],

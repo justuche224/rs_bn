@@ -21,8 +21,8 @@ export class ProductService {
             name,
             createdAt: new Date(),
             updatedAt: new Date(),
-        });
-        return { success: true, categoryId: newCategory[0].insertId };
+        }).returning();
+        return { success: true, categoryId: newCategory[0].id };
     }
     async updateCategory(categoryId, name) {
         const category = await db
@@ -117,10 +117,10 @@ export class ProductService {
             img: filename,
             createdAt: new Date(),
             updatedAt: new Date(),
-        });
+        }).returning();
         return {
             success: true,
-            productId: newProduct[0].insertId,
+            productId: newProduct[0].id,
             imageUrl: `${process.env.BASE_URL}/api/products/image/${filename}`,
         };
     }

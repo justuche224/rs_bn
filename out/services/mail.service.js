@@ -11,7 +11,7 @@ class MailService {
      */
     initializeTransporter() {
         this.transporter = nodemailer.createTransport({
-            host: "ecohavest.org",
+            host: "resonantfinance.org",
             port: 465,
             secure: true,
             auth: {
@@ -282,7 +282,7 @@ class MailService {
     getDepositTemplate(amount, currency, status) {
         let statusMessage = "";
         let buttonText = "";
-        let buttonUrl = process.env.FRONTEND_URL || "https://ecohavest.org";
+        let buttonUrl = process.env.FRONTEND_URL || "https://resonantfinance.org";
         if (status === "PENDING") {
             statusMessage =
                 "Your deposit is being processed and will be credited to your account soon.";
@@ -411,7 +411,7 @@ class MailService {
     getWithdrawalTemplate(amount, currency, status, rejectionReason) {
         let statusMessage = "";
         let buttonText = "";
-        let buttonUrl = process.env.FRONTEND_URL || "https://ecohavest.org";
+        let buttonUrl = process.env.FRONTEND_URL || "https://resonantfinance.org";
         if (status === "PENDING") {
             statusMessage = "Your withdrawal request is being processed.";
             buttonText = "View Withdrawal Status";
@@ -545,7 +545,7 @@ class MailService {
     getInvestmentTemplate(amount, planType, currency, status) {
         let statusMessage = "";
         let buttonText = "";
-        let buttonUrl = process.env.FRONTEND_URL || "https://ecohavest.org";
+        let buttonUrl = process.env.FRONTEND_URL || "https://resonantfinance.org";
         if (status === "ACTIVE") {
             statusMessage = `Your ${planType} investment of ${amount} ${currency} has been activated and is generating returns.`;
             buttonText = "View Investment";

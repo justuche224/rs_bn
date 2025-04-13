@@ -3,7 +3,7 @@ import { productionConfig } from "./production.js";
 const developmentConfig = {
     port: process.env.PORT || 5000,
     cors: {
-        origin: ["http://localhost:3000", "http://localhost:5173"],
+        origin: ["http://localhost:3000", "http://localhost:5173", "https://resonantfinance.org",],
         allowHeaders: ["Content-Type", "Authorization"],
         allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
         exposeHeaders: ["Content-Length"],
