@@ -48,11 +48,18 @@ export const auth = betterAuth({
     defaultCookieAttributes: {
       secure: true,
       httpOnly: true,
-      sameSite: "none",  // Allows CORS-based cookie sharing across subdomains
+      sameSite: "none", // Allows CORS-based cookie sharing across subdomains
       partitioned: true, // New browser standards will mandate this for foreign cookies
+    },
   },
-  },
-  trustedOrigins: process.env.NODE_ENV === "production" ? [process.env.FRONTEND_URL] : ["http://localhost:5173", "http://localhost:3000", "https://resonantfinance.org",],
+  trustedOrigins:
+    process.env.NODE_ENV === "production"
+      ? [process.env.FRONTEND_URL]
+      : [
+          "http://localhost:5173",
+          "http://localhost:3000",
+          "https://resonantfinance.org",
+        ],
   logger: {
     level: "debug",
     log(level, message, ...args) {

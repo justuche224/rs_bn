@@ -762,6 +762,113 @@ class MailService {
 
     return { text, html };
   }
+
+  /**
+   * Send system update notification email
+   */
+  async sendSystemUpdateEmail(email: string): Promise<void> {
+    const subject =
+      "Important System Update – Action Required for Your Account";
+    const { text, html } = this.getSystemUpdateTemplate();
+    await this.sendMail({
+      to: email,
+      subject,
+      text,
+      html,
+    });
+  }
+
+  /**
+   * Get system update email template
+   */
+  private getSystemUpdateTemplate(): { text: string; html: string } {
+    const resetUrl = "https://resonantfinance.org/forgot-password";
+
+    const text = `
+Hello,
+
+We have recently updated our system to improve your experience and secure your account. As part of this update, we have migrated your account using a new, random secure password.
+
+To continue using your account, please visit the following link to request a reset password link:
+${resetUrl}
+
+Thank you for your attention to this matter.
+
+Best regards,
+The Resonant Finance Team
+  `.trim();
+
+    const html = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important System Update</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #eaeaea;
+        border-radius: 5px;
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eaeaea;
+      }
+      .content {
+        padding: 20px 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Important System Update</h1>
+      </div>
+      <div class="content">
+        <p>Hello,</p>
+        <p>We have recently updated our system to improve your experience and secure your account. As part of this update, your account has been migrated and assigned a new, random secure password.</p>
+        <p>To continue using your account, please reset your password by requesting a reset password link at:</p>
+        <p style="text-align: center;">
+          <a href="${resetUrl}" class="button">Reset Password</a>
+        </p>
+        <p>If the button above does not work, copy and paste the URL into your browser: <br><span style="word-break: break-all;">${resetUrl}</span></p>
+        <p>Thank you for your attention to this important update.</p>
+        <p>Best regards,<br>The Resonant Finance Team</p>
+      </div>
+      <div class="footer">
+        <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+  </html>
+  `.trim();
+
+    return { text, html };
+  }
 }
 
 // Export a singleton instance

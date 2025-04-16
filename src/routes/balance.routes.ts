@@ -18,4 +18,7 @@ balanceRouter.get(
   WithdrawalController.getUserApprovedWithdrawals
 );
 
+// Admin routes
+balanceRouter.post("/admin/adjust", BalanceController.adminAdjustBalance);
+
 export default balanceRouter;

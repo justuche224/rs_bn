@@ -134,6 +134,8 @@ export class BalanceService {
       .from(balance)
       .where(eq(balance.userId, userId));
 
+    console.log("balances in service", balances);
+
     // Sum up balances for each currency
     for (const record of balances) {
       totalBalances[record.currency] = (
@@ -141,6 +143,64 @@ export class BalanceService {
       ).toString();
     }
 
+    console.log("totalBalances in service", totalBalances);
     return totalBalances;
+  }
+
+  async adminAdjustBalance(userId: string, currency: Currency, amount: string, adminUserId: string) {
+    // Input validation: Ensure amount is a valid integer string
+    let adjustmentAmount: bigint;
+    try {
+      adjustmentAmount = BigInt(amount);
+      console.log(adjustmentAmount);
+    } catch (error) {
+      throw new Error("Invalid amount format. Amount must be an integer string.");
+    }
+
+    const existingBalance = await this.getUserBalance(userId, currency);
+    console.log(existingBalance);
+    let newAmount: string;
+
+    if (!existingBalance) {
+      // If balance doesn't exist and adjustment is positive, create it.
+      if (adjustmentAmount > 0n) {
+        await db.insert(balance).values({
+          userId,
+          currency,
+          amount: adjustmentAmount.toString(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+        console.log(`Admin (${adminUserId}) created balance for user (${userId}) with ${amount} ${currency}`);
+        return { success: true, newBalance: adjustmentAmount.toString() };
+      } else {
+        // Cannot decrease a non-existent balance
+        throw new Error("Cannot decrease balance: User has no balance for this currency.");
+      }
+    } else {
+      // Calculate new balance
+      const currentBalance = BigInt(existingBalance.amount);
+      const calculatedNewAmount = currentBalance + adjustmentAmount;
+      console.log("calculatedNewAmount", calculatedNewAmount);
+
+      // Ensure balance does not go below zero
+      if (calculatedNewAmount < 0n) {
+        throw new Error("Insufficient balance: Adjustment would result in a negative balance.");
+      }
+      newAmount = calculatedNewAmount.toString();
+      console.log("newAmount", newAmount);
+    }
+
+    // Update existing balance
+    await db
+      .update(balance)
+      .set({
+        amount: newAmount,
+        updatedAt: new Date(),
+      })
+      .where(and(eq(balance.userId, userId), eq(balance.currency, currency)));
+
+    console.log(`Admin (${adminUserId}) adjusted balance for user (${userId}) by ${amount} ${currency}. New balance: ${newAmount}`);
+    return { success: true, newBalance: newAmount };
   }
 }
