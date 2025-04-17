@@ -1,11 +1,9 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import db from "../db/index.js";
-import { emailHarmony } from 'better-auth-harmony';
 import { mailService } from "../services/mail.service.js";
 
 export const auth = betterAuth({
-  plugins: [emailHarmony()],
   database: drizzleAdapter(db, {
     provider: "pg",
   }),

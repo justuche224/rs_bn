@@ -17,9 +17,6 @@ importers:
       better-auth:
         specifier: ^1.2.5
         version: 1.2.7
-      better-auth-harmony:
-        specifier: ^1.2.4
-        version: 1.2.4(better-auth@1.2.7)
       decimal.js:
         specifier: ^10.5.0
         version: 10.5.0
@@ -1058,11 +1055,6 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  better-auth-harmony@1.2.4:
-    resolution: {integrity: sha512-a5Qe+fEWcOR7c9bmy+g/FmRf3TuJqv3pdz6WD/seuh/ykkxi93u6lG++/L0BIFNhSZkXeIrrosmfBFTycfL3XA==}
-    peerDependencies:
-      better-auth: ^1.0.3
-
   better-auth@1.2.7:
     resolution: {integrity: sha512-2hCB263GSrgetsMUZw8vv9O1e4S4AlYJW3P4e8bX9u3Q3idv4u9BzDFCblpTLuL4YjYovghMCN0vurAsctXOAQ==}
 
@@ -1784,9 +1776,6 @@ packages:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
 
-  libphonenumber-js@1.12.7:
-    resolution: {integrity: sha512-0nYZSNj/QEikyhcM5RZFXGlCB/mr4PVamnT1C2sKBnDDTYndrvbybYjvg+PMqAndQHlLbwQ3socolnL3WWTUFA==}
-
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
@@ -1810,10 +1799,6 @@ packages:
   lru.min@1.1.2:
     resolution: {integrity: sha512-Nv9KddBcQSlQopmBHXSsZVY5xsdlZkdH/Iey0BlcBYggMd4two7cZnKOK9vmy3nY0O5RGH99z1PCeTpPqszUYg==}
     engines: {bun: '>=1.0.0', deno: '>=1.30.0', node: '>=8.0.0'}
-
-  mailchecker@6.0.17:
-    resolution: {integrity: sha512-7wfgNChUp7mqzoh31l8aII2swlalW9Wfxqa6XrNVCyf2pardtSzNKatf4OWng4bQnXN5lvgk7Pd9kLrWbs/ylA==}
-    engines: {node: '>=0.10'}
 
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
@@ -2225,10 +2210,6 @@ packages:
   v8-to-istanbul@9.3.0:
     resolution: {integrity: sha512-kiGUalWN+rgBJ/1OHZsBtU4rXZOfj/7rKQxULKlIzwzQSvMJUUNgPwJEEh7gU6xEVxC0ahoOBvN2YI8GH6FNgA==}
     engines: {node: '>=10.12.0'}
-
-  validator@13.15.0:
-    resolution: {integrity: sha512-36B2ryl4+oL5QxZ3AzD0t5SsMNGvTtQHpjgFO5tbNxfXbMFkY822ktCDe1MnlqV3301QQI9SLHDNJokDI+Z9pA==}
-    engines: {node: '>= 0.10'}
 
   walker@1.0.8:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}
@@ -3203,13 +3184,6 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  better-auth-harmony@1.2.4(better-auth@1.2.7):
-    dependencies:
-      better-auth: 1.2.7
-      libphonenumber-js: 1.12.7
-      mailchecker: 6.0.17
-      validator: 13.15.0
-
   better-auth@1.2.7:
     dependencies:
       '@better-auth/utils': 0.2.4
@@ -4086,8 +4060,6 @@ snapshots:
 
   leven@3.1.0: {}
 
-  libphonenumber-js@1.12.7: {}
-
   lines-and-columns@1.2.4: {}
 
   locate-path@5.0.0:
@@ -4105,8 +4077,6 @@ snapshots:
   lru-cache@7.18.3: {}
 
   lru.min@1.1.2: {}
-
-  mailchecker@6.0.17: {}
 
   make-dir@4.0.0:
     dependencies:
@@ -4499,8 +4469,6 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.25
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
-
-  validator@13.15.0: {}
 
   walker@1.0.8:
     dependencies:
