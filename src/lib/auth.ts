@@ -1,9 +1,11 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import db from "../db/index.js";
+import { emailHarmony } from 'better-auth-harmony';
 import { mailService } from "../services/mail.service.js";
 
 export const auth = betterAuth({
+  plugins: [emailHarmony()],
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
@@ -11,6 +13,10 @@ export const auth = betterAuth({
     customRules: {
       "/forget-password": { window: 10, max: 3 },
       "/sign-in/email": {
+        window: 10,
+        max: 3,
+      },
+      "/sign-up": {
         window: 10,
         max: 3,
       },
