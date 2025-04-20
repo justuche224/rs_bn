@@ -73,7 +73,7 @@ class MailService {
      * Get password reset email template
      */
     getPasswordResetTemplate(resetUrl) {
-        const text = `Reset your password for EcoHarvest. Click the link to reset your password: ${resetUrl}`;
+        const text = `Reset your password for Resonant Finance. Click the link to reset your password: ${resetUrl}`;
         const html = `
     <!DOCTYPE html>
     <html>
@@ -125,7 +125,7 @@ class MailService {
           <h1>Reset Your Password</h1>
         </div>
         <div class="content">
-          <p>You've requested to reset your password for your EcoHarvest account.</p>
+          <p>You've requested to reset your password for your Resonant Finance account.</p>
           <p>Click the button below to reset your password. This link will expire in 30 minutes.</p>
           <p style="text-align: center;">
             <a href="${resetUrl}" class="button">Reset Password</a>
@@ -135,7 +135,7 @@ class MailService {
           <p style="word-break: break-all;">${resetUrl}</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} EcoHarvest. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -147,7 +147,7 @@ class MailService {
      * Get verification email template
      */
     getVerificationEmailTemplate(verificationUrl) {
-        const text = `Welcome to EcoHarvest! Please verify your email address by clicking the following link: ${verificationUrl}`;
+        const text = `Welcome to Resonant Finance! Please verify your email address by clicking the following link: ${verificationUrl}`;
         const html = `
     <!DOCTYPE html>
     <html>
@@ -196,10 +196,10 @@ class MailService {
     <body>
       <div class="container">
         <div class="header">
-          <h1>Welcome to EcoHarvest!</h1>
+          <h1>Welcome to Resonant Finance!</h1>
         </div>
         <div class="content">
-          <p>Thank you for signing up with EcoHarvest. To get started, please verify your email address.</p>
+          <p>Thank you for signing up with Resonant Finance. To get started, please verify your email address.</p>
           <p>Click the button below to verify your email address:</p>
           <p style="text-align: center;">
             <a href="${verificationUrl}" class="button">Verify Email</a>
@@ -208,7 +208,7 @@ class MailService {
           <p style="word-break: break-all;">${verificationUrl}</p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} EcoHarvest. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -397,7 +397,7 @@ class MailService {
           </p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} EcoHarvest. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -531,7 +531,7 @@ class MailService {
           </p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} EcoHarvest. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -666,7 +666,7 @@ class MailService {
           </p>
         </div>
         <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} EcoHarvest. All rights reserved.</p>
+          <p>&copy; ${new Date().getFullYear()} Resonant Finance. All rights reserved.</p>
         </div>
       </div>
     </body>
