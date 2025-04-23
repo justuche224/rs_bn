@@ -52,13 +52,11 @@ export const auth = betterAuth({
       domain: ".resonantfinance.org",
     },
   },
-  trustedOrigins:
-    process.env.NODE_ENV === "production"
-      ? [process.env.FRONTEND_URL]
-      : [
+  trustedOrigins: [
           "http://localhost:5173",
           "http://localhost:3000",
           "https://resonantfinance.org",
+          "https://www.resonantfinance.org",
         ],
   logger: {
     level: "debug",
