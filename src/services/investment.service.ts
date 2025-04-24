@@ -153,7 +153,7 @@ export class InvestmentService {
   async getAllInvestments() {
     // Consider adding pagination (e.g., limit, offset) for large datasets
     // TODO: Add pagination logic
-    return await db
+    const data = await db
       .select({
         // Select specific fields instead of '*' for performance and clarity
         id: investments.id,
@@ -171,6 +171,10 @@ export class InvestmentService {
       .leftJoin(user, eq(investments.userId, user.id))
       .leftJoin(plans, eq(investments.planId, plans.id))
       .orderBy(desc(investments.createdAt));
+
+      // console.log("done, about to log")
+      // console.log(data)
+      return data
   }
 
   async deleteInvestments(investmentIds: string[]) {
