@@ -53,12 +53,9 @@ app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
 
-app.get("/test", (c)=> {
-  let todos
-  await fetch('https://jsonplaceholder.typicode.com/todos/1')
-  .then(response => response.json())
-  .then(json => todos = json)
-
+app.get("/test", async (c)=> {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  const todos = await response.json()
   return c.json(todos)
 })
 
