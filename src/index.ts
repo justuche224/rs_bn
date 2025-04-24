@@ -53,6 +53,15 @@ app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
 
+app.get("/test", (c)=> {
+  let todos
+  await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(json => todos = json)
+
+  return c.json(todos)
+})
+
 app.get("/update-email", async (c) => {
   // Define your list of emails here
   const emails: string[] = [
