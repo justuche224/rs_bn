@@ -6,7 +6,7 @@ const developmentConfig = {
   cors: {
     origin: ["http://localhost:3000", "http://localhost:5173", "https://resonantfinance.org", "https://www.resonantfinance.org",],
     allowHeaders: ["Content-Type", "Authorization"],
-    allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
+    allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE", "PATCH"],
     exposeHeaders: ["Content-Length"],
     maxAge: 600,
     credentials: true,
