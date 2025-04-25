@@ -49,7 +49,7 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
       sameSite: "none",
-      // domain: ".resonantfinance.org",
+      domain: ".resonantfinance.org",
     },
   },
   trustedOrigins: [
