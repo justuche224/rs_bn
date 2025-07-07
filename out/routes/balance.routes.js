@@ -11,4 +11,6 @@ balanceRouter.get("/total", BalanceController.getTotalSystemBalance);
 balanceRouter.get("/total/user", BalanceController.getUserTotalBalance);
 balanceRouter.get("/info", BalanceController.getUserBalance);
 balanceRouter.get("/withdrawals/total", WithdrawalController.getUserApprovedWithdrawals);
+// Admin routes
+balanceRouter.post("/admin/adjust", BalanceController.adminAdjustBalance);
 export default balanceRouter;

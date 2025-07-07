@@ -7,8 +7,7 @@ investmentRouter.use("*", requireAuth);
 // Investment routes
 investmentRouter.post("/", InvestmentController.createInvestment);
 investmentRouter.get("/", InvestmentController.getUserInvestments);
-investmentRouter.get("/:id", InvestmentController.getInvestmentById);
-// admin routes
 investmentRouter.get("/all", requireAdmin, InvestmentController.getAllInvestments);
+investmentRouter.get("/:id", InvestmentController.getInvestmentById);
 investmentRouter.patch("/:id/status", requireAdmin, InvestmentController.updateInvestmentStatus);
 export default investmentRouter;

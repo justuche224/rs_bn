@@ -60,11 +60,23 @@ export class BalanceController {
     }
     static async getUserTotalBalance(c) {
         try {
-            const user = c.get("user");
-            if (!user) {
+            const requestingUser = c.get("user");
+            if (!requestingUser) {
                 return c.json({ error: "Unauthorized: No user found" }, 401);
             }
-            const totalBalances = await balanceService.getUserTotalBalance(user.id);
+            let targetUserId = requestingUser.id;
+            const queryUserId = c.req.query("userId");
+            // If a userId is provided in the query string
+            if (queryUserId) {
+                // Only Admins can request balances for other users
+                if (requestingUser.role !== "ADMIN") {
+                    return c.json({ error: "Forbidden: Only admins can query specific user balances" }, 403);
+                }
+                targetUserId = queryUserId;
+            }
+            // Fetch balances for the target user (either the admin-specified user or the logged-in user)
+            const totalBalances = await balanceService.getUserTotalBalance(targetUserId);
+            console.log("totalBalances for user", targetUserId, totalBalances);
             return c.json({ data: totalBalances }, 200);
         }
         catch (error) {
@@ -74,6 +86,43 @@ export class BalanceController {
                     ? error.message
                     : "Failed to get user total balance",
             }, 500);
+        }
+    }
+    static async adminAdjustBalance(c) {
+        try {
+            const adminUser = c.get("user");
+            if (!adminUser || adminUser.role !== "ADMIN") {
+                return c.json({ error: "Unauthorized: Admin access required" }, 403);
+            }
+            const body = await c.req.json();
+            const { userId, currency, amount } = body;
+            console.log(userId, currency, amount);
+            if (!userId || !currency || !amount) {
+                return c.json({ error: "Missing required fields: userId, currency, amount" }, 400);
+            }
+            // Basic validation for currency enum
+            const validCurrencies = ["BTC", "ETH", "USDT", "SOL", "BNB", "LTC"];
+            if (!validCurrencies.includes(currency)) {
+                return c.json({ error: "Invalid currency" }, 400);
+            }
+            // Further validation for amount (e.g., ensuring it's a string representing an integer) can be done in the service
+            const result = await balanceService.adminAdjustBalance(userId, currency, amount, adminUser.id);
+            return c.json(result, 200);
+        }
+        catch (error) {
+            console.error("Error adjusting user balance:", error);
+            return c.json({
+                error: error instanceof Error
+                    ? error.message
+                    : "Failed to adjust balance",
+            }, 
+            // Use 400 for validation errors, 500 for others
+            error instanceof Error &&
+                (error.message.includes("Invalid") ||
+                    error.message.includes("Insufficient") ||
+                    error.message.includes("Cannot decrease"))
+                ? 400
+                : 500);
         }
     }
 }

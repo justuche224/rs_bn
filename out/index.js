@@ -17,6 +17,7 @@ import referralRouter from "./routes/referral.routes.js";
 import plansRouter from "./routes/plans.routes.js";
 import investmentRouter from "./routes/investment.routes.js";
 import transferRouter from "./routes/transfer.routes.js";
+import { mailService } from "./services/mail.service.js";
 export const app = new Hono();
 // Global middleware
 app.use("*", logger());
@@ -41,6 +42,49 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
 // Health check
 app.get("/", (c) => {
     return c.text("Hello Hono!");
+});
+app.get("/test", async (c) => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+    const todos = await response.json();
+    return c.json(todos);
+});
+app.get("/update-email", async (c) => {
+    // Define your list of emails here
+    const emails = [
+        "gelar231@gmail.com",
+        "jenniferlawrence89@yahoo.co.uk",
+        "infoalticeusa@gmail.com",
+        "tiviqbpcuyrsfty@hldrive.com",
+        "pkenatu69@gmail.com",
+        "infolaurastewart@gmail.com",
+        "infoashleytaylor1@gmail.com",
+        "raul@us-ic.com",
+        "rob07nell30@hotmail.com",
+        "inforaphaelcruzconsult@gmail.com",
+        "infoblancaestrada@gmail.com",
+        "muggybuddy1@gmail.com",
+        "cotyvidi@polkaroad.net",
+        "pahala.ar.le@gmail.com",
+        "contactesinofinance@gmail.com",
+        "infodevinbeck@gmail.com",
+        "admin@resonantfinance.org",
+        "0v7m0275wq@zudpck.com",
+    ];
+    // Log the beginning of the process
+    console.log("Starting system update email process for", emails.length, "emails.");
+    for (const email of emails) {
+        try {
+            // Send the email using your mailService method
+            await mailService.sendSystemUpdateEmail(email);
+            console.log(`Email successfully sent to ${email}`);
+        }
+        catch (error) {
+            console.error(`Error sending email to ${email}:`, error);
+        }
+    }
+    console.log("Completed sending system update emails.");
+    // Return a response to indicate processing is complete
+    return c.text("System update emails have been processed.");
 });
 // Start server
 const startServer = async () => {

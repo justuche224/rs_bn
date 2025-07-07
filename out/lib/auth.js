@@ -9,7 +9,7 @@ export const auth = betterAuth({
     rateLimit: {
         customRules: {
             "/forget-password": { window: 10, max: 3 },
-            "/sign-in/email": {
+            "/sign-up": {
                 window: 10,
                 max: 3,
             },
@@ -47,11 +47,16 @@ export const auth = betterAuth({
         defaultCookieAttributes: {
             secure: true,
             httpOnly: true,
-            sameSite: "none", // Allows CORS-based cookie sharing across subdomains
-            partitioned: true, // New browser standards will mandate this for foreign cookies
+            sameSite: "none",
+            domain: ".resonantfinance.org",
         },
     },
-    trustedOrigins: process.env.NODE_ENV === "production" ? [process.env.FRONTEND_URL] : ["http://localhost:5173", "http://localhost:3000", "https://resonantfinance.org",],
+    trustedOrigins: [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://resonantfinance.org",
+        "https://www.resonantfinance.org",
+    ],
     logger: {
         level: "debug",
         log(level, message, ...args) {

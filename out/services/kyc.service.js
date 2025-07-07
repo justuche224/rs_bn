@@ -117,7 +117,7 @@ export class KYCService {
             await db
                 .update(user)
                 .set({
-                kycVerified: true,
+                kyc_verified: true,
                 updatedAt: new Date(),
             })
                 .where(eq(user.id, kycRecord[0].userId));

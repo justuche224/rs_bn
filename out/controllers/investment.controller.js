@@ -145,11 +145,13 @@ export class InvestmentController {
         }
     }
     static async getAllInvestments(c) {
+        // console.log("investments")
         try {
             const user = c.get("user");
             if (!user || user.role !== "ADMIN") {
                 return c.json({ error: "Forbidden: Admin access required" }, 403);
             }
+            // console.log("about to get investments")
             const investments = await investmentService.getAllInvestments();
             return c.json({ data: investments }, 200);
         }
